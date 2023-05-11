@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>HomePage</title>
+    <title>Hotel Details</title>
     <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700&amp;display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic&amp;display=swap">
@@ -13,9 +13,10 @@
     <link rel="stylesheet" href="/assets/css/Features-Image-images.css">
     <link rel="stylesheet" href="/assets/css/Login-Form-Basic-icons.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <script>
-        function showData(id, name, address, city, district, email, contact, accNo, ifsc, upi)
+        function showData(id, name, address, city, district, email, contact, bankAccount, ifsc, upi)
         {
             $('#id').val(id);
             $('#name').val(name);
@@ -24,7 +25,7 @@
             $('#district').val(district);
             $('#email').val(email);
             $('#contact').val(contact);
-            $('#accNo').val(accNo);
+            $('#bankAccount').val(bankAccount);
             $('#ifsc').val(ifsc);
             $('#upi').val(upi);
         }
@@ -32,6 +33,16 @@
 </head>
 
 <body style="background: rgb(241,247,252);">
+
+<script th:inline="javascript">
+        var msg = [[${msg}]]
+
+        if(msg != null)
+        {
+            swal("Add Hotel", msg, "success");
+        }
+    </script>
+
     <div class="modal fade" role="dialog" tabindex="-1" id="modalAddNewItem" style="text-align: right;">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -45,10 +56,10 @@
                             <input id="name" class="form-control" type="text"  placeholder="Name" name="name" th:value="${hotel?.name}" inputmode="numeric">
                             <input id="address" class="form-control" type="text"  required="" name="address" th:value="${hotel?.address}" inputmode="numeric" autofocus="" placeholder="Address">
                             <input id="city" class="form-control" type="text"  placeholder="City" inputmode="text" style="padding: 5px 12px;" name="city" th:value="${hotel?.city}">
-                            <input id="district" class="form-control" type="text"  placeholder="District" inputmode="numeric"style="padding: 5px 12px;" name="district" th:value="${hotel?.district}">
-                            <input id="email" class="form-control" type="text"  placeholder="Email" inputmode="numeric" style="padding: 5px 12px;" name="email" th:value="${hotel?.email}">
+                            <input id="district" class="form-control" type="text"  placeholder="District" style="padding: 5px 12px;" name="district" th:value="${hotel?.district}">
+                            <input id="email" class="form-control" type="text"  placeholder="Email"  style="padding: 5px 12px;" name="email" th:value="${hotel?.email}">
                             <input id="contact" class="form-control" type="text"  placeholder="Contact" inputmode="numeric" style="padding: 5px 12px;" name="contact" th:value="${hotel?.contact}">
-                            <input id="accNo" class="form-control" type="text"  placeholder="AccountNo" inputmode="numeric" style="padding: 5px 12px;" name="accountNo" th:value="${hotel?.accountNo}">
+                            <input id="bankAccount" class="form-control" type="text"  placeholder="AccountNo" inputmode="numeric" style="padding: 5px 12px;" name="bankAccount" th:value="${hotel?.bankAccount}">
                             <input id="ifsc" class="form-control" type="text"  inputmode="numeric" style="padding: 5px 12px;" name="ifsc" placeholder="IFSC Code" th:value="${hotel?.ifsc}">
                             <input id="upi" class="form-control" type="text"  inputmode="numeric" style="padding: 5px 12px;" name="upi" placeholder="UPI Id" th:value="${hotel?.upi}">
                         </div>
@@ -104,11 +115,11 @@
                         <tbody>
                             <tr>
                             <tr th:each="hotel:${list}">
-                                <td  th:text="${hotel.id}"style="text-align: right;"></td>
-                                <td  th:text="${hotel.name}"></td>
-                                <td  th:text="${hotel.address}" style="text-align: right;"></td>
-                                <td  th:text="${hotel.contact}" style="text-align: right;"></td>
-                                <td  th:text="${hotel.email}" style="text-align: right;"></td>
+                                <td  th:text="${hotel.id}"style="text-align: center;"></td>
+                                <td  th:text="${hotel.name}" style="text-align: left;"></td>
+                                <td  th:text="${hotel.address}" style="text-align: left;"></td>
+                                <td  th:text="${hotel.contact}" style="text-align: center;"></td>
+                                <td  th:text="${hotel.email}" style="text-align: left;"></td>
                                 <td class="text-center">
                                     <div class="btn-group" role="group">
                                         <a th:href="@{/hotel/delete/{id}/(id = ${hotel.id})}" class="btn btn-danger" role="button " data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-placement="bottom" data-bss-hover-animate="pulse" title="Delete"><i class="fas fa-trash"></i></a>

@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>HomePage</title>
+    <title>Orders Admin</title>
     <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700&amp;display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic&amp;display=swap">
@@ -36,6 +36,7 @@
                             <div class="col-md-8 col-lg-6 col-xl-5 col-xxl-4" style="width: 500px;">
                                 <div class="card mb-5">
                                     <div class="card-body p-sm-5">
+
                                         <form method="post">
                                             <div class="mb-3"><input class="form-control" type="text" id="name-2" name="name" placeholder="Product name"></div>
                                             <div class="mb-3"><input class="form-control" type="text" id="name-3" name="price" placeholder="Rate"></div>
@@ -44,6 +45,7 @@
                                             <div class="mb-3"></div>
                                             <div></div>
                                         </form>
+
                                     </div>
                                 </div>
                             </div>
@@ -73,7 +75,7 @@
                     <tbody>
                     <tr th:each="orders : ${listOrders}">
                         <td th:text="${orders.id}" style="text-align: right;">Id</td>
-                        <td th:text="${userDao.getReferenceById(orders.idCustomer).getName()}" style="text-align: right;">Name</td>
+                        <td th:text="${userDao.getReferenceById(orders.idCustomer).getName()}" style="text-align: left;">Name</td>
                         <td th:text="${#temporals.format(orders.date, 'dd-MM-yyyy')}" style="text-align: center;">Order Date</td>
                         <td th:text="${#temporals.format(orders.visitingDateTime, 'dd-MM-yyyy HH:mm')}" style="text-align: center;">Visiting Date</td>
                         <td class="text-center">
@@ -85,8 +87,9 @@
                         </td>
                         <td class="text-center">
                             <div class="btn-group" role="group">
-                                <a class="btn btn-warning" role="button" data-bs-toggle="modal" data-bss-tooltip="" data-bs-placement="bottom" data-bss-hover-animate="pulse" title="Invoice" data-bs-target="#modalContactDetails"><i class="fas fa-utensils"></i></a>
-                                <a class="btn btn-danger" role="button" data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-placement="bottom" data-bss-hover-animate="pulse" title="Invoice"><i class="fas fa-trash"></i></a></div>
+                                <a th:href="@{/orders/invoice/{id}/(id = ${orders.id})}" class="btn btn-warning" role="button"  data-bss-tooltip="" data-bs-placement="bottom" data-bss-hover-animate="pulse" title="Invoice" ><i class="fas fa-utensils"></i></a>
+<!--                                <a class="btn btn-warning" role="button" data-bs-toggle="modal" data-bss-tooltip="" data-bs-placement="bottom" data-bss-hover-animate="pulse" title="Invoice" data-bs-target="#modalContactDetails"><i class="fas fa-utensils"></i></a>-->
+                                <a th:href="@{/orders/admin/delete/{id}/(id = ${orders.id})}" class="btn btn-danger" role="button" data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-placement="bottom" data-bss-hover-animate="pulse" title="Delete"><i class="fas fa-trash"></i></a></div>
                         </td>
                     </tr>
                     </tbody>

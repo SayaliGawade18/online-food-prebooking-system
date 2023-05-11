@@ -2,6 +2,7 @@ package com.example.onlinepreorderingsystem.controller;
 
 import com.example.onlinepreorderingsystem.dao.UserDao;
 import com.example.onlinepreorderingsystem.entity.Category;
+import com.example.onlinepreorderingsystem.entity.Hotel;
 import com.example.onlinepreorderingsystem.entity.User;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,16 +61,6 @@ public class UserController
         model.addAttribute("btnUrl", signUrl);
     }
 
-    /*@GetMapping("/Customer/delete/{id}/")
-    public String deleteCustomer(Model model,@PathVariable long id)
-    {
-        UserDao.deleteById(id);
 
-        List<User> list =  UserDao.findAll();
-        model.addAttribute("list",list);
-
-        return"CustomerDetails";
-
-    }*/
 
 }

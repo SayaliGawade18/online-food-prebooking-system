@@ -37,7 +37,7 @@ public class ProductController
     }
 
     @PostMapping("/product/add/")
-    public String addProduct(Model model, Long id,String name, String description, double price, double discount, Long idCategory, MultipartFile file)
+    public String addProduct(Model model, Long id, String name, String description, double price, double discount, Long idCategory, MultipartFile file)
     {
 //        Product product = null;
 //
@@ -49,12 +49,11 @@ public class ProductController
 //            product.setPrice(price);
 //            product.setDiscount(discount);
 //            product.setIdCategory(idCategory);
-//
-//
+//            product.setFile(file);
 //        }
 //        else
 //        {
-//            product = new Product(idCategory, name, description, price, discount, fileNewName);
+//            product = new Product(idCategory, name, description, price, discount,file);
 //        }
 
         String fileName = file.getOriginalFilename();
@@ -63,6 +62,10 @@ public class ProductController
         uploader.uploadFile(file, fileNewName);
 
         Product product = new Product(idCategory, name, description, price, discount, fileNewName);
+        if(id != null)
+        {
+            product.setId(id);
+        }
         Product savedProduct = productDao.save(product);
 
         List<Category> listCategory = categoryDao.findAll();

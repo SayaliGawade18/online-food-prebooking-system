@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <title>Feedback Details</title>
+  <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Akaya+Kanadaka&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Almendra&amp;display=swap">
+  <link rel="stylesheet" href="/assets/fonts/fontawesome-all.min.css">
+  <link rel="stylesheet" href="/assets/css/animate.min.css">
+  <link rel="stylesheet" href="/assets/css/Bootstrap-4---Payment-Form.css">
+  <link rel="stylesheet" href="/assets/css/Features-Image-images.css">
+  <link rel="stylesheet" href="/assets/css/Login-Form-Basic-icons.css">
+</head>
+
+<body style="background: rgb(241,247,252);">
+
+
+<section class="login-clean" style="padding-top: 20px;padding-bottom: 10px;">
+  <div class="card" style="width: 95%;box-shadow: 3px 3px 7px var(--bs-gray-500);margin-right: auto;margin-left: auto;padding: 15px;">
+    <div class="card-body" style="padding: 0px;">
+      <div class="input-group" style="margin-bottom: 10px;"><input class="form-control" type="search" placeholder="Search By Keyword" style="min-width: 100px;" autofocus=""><span class="flex-sm-wrap input-group-text">Max Records to Show</span><input class="form-control" type="number" value="10" name="maxRow" style="text-align: right;max-width: 100px;"></div>
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+          <tr style="background: var(--bs-blue);color: var(--bs-table-border-color);">
+            <th style="text-align: center;">Customer Id</th>
+            <th style="text-align: center;">Customer Name</th>
+            <th style="text-align: center;">Feedback</th>
+            <th style="text-align: center;">Action</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="feedback:${list}">
+            <td th:text="${feedback.id}" style="text-align: center;">Cell 1</td>
+            <td th:text="${feedback.name}" >&nbsp;Category1</td>
+            <td th:text="${feedback.message}" style="text-align: left;">Feedback</td>
+            <td class="text-center">
+              <div class="btn-group" role="group"><a th:href="@{/feedback/delete/{id}/(id = ${feedback.id})}" class="btn btn-danger" role="button" data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-placement="bottom" data-bss-hover-animate="pulse" title="Delete"><i class="fas fa-trash"></i></a></div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <nav>
+        <ul class="pagination justify-content-center">
+          <li class="page-item"><a class="page-link" aria-label="Previous" href="#"><span aria-hidden="true">«</span></a></li>
+          <li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" aria-label="Next" href="#"><span aria-hidden="true">»</span></a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</section>
+<script src="/assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="/assets/js/bs-init.js"></script>
+<script src="/assets/js/freelancer.js"></script>
+<script src="/assets/js/Bootstrap-4---Payment-Form-script.js"></script>
+</body>
+
+</html>

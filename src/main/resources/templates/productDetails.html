@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>HomePage</title>
+    <title>Product Details</title>
     <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700&amp;display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic&amp;display=swap">
@@ -12,23 +12,33 @@
     <link rel="stylesheet" href="/assets/css/animate.min.css">
     <link rel="stylesheet" href="/assets/css/Features-Image-images.css">
     <link rel="stylesheet" href="/assets/css/Login-Form-Basic-icons.css">
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
     <script>
-        function showData(id, idCategory, name, description, price, discount, img)
+        function showData(id, name, description, price, discount, idCategory, img)
         {
             $('#id').val(id);
-            $('#idCategory').val(idCategory);
             $('#name').val(name);
             $('#description').val(description);
             $('#price').val(price);
             $('#discount').val(discount);
+            $('#idCategory').val(idCategory);
             $('#img').val(img);
         }
     </script>
 </head>
 
 <body style="background: rgb(241,247,252);">
+
+<script th:inline="javascript">
+        var msg = [[${msg}]]
+
+        if(msg != null)
+        {
+            swal("Add Product", msg, "success");
+        }
+    </script>
     <div class="modal fade" role="dialog" tabindex="-1" id="modalAddNewItem" style="text-align: right;">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -40,9 +50,9 @@
                         <div class="text-center mb-3">
                             <input type="hidden" id="id" name="id">
                             <input id="name"  class="form-control" type="text" placeholder="Enter food title here" name="name" inputmode="numeric" th:value="${product?.name}" required="">
-                            <textarea id="description" class="form-control" name="description" placeholder="Enter food description here"></textarea>
-                            <input id="price" class="form-control" type="text" placeholder="Enter food price here" inputmode="numeric" style="padding: 5px 12px;" name="price">
-                            <input id="discount" class="form-control" type="text" placeholder="Food Discount in (%)" inputmode="numeric" style="padding: 5px 12px;" name="discount">
+                            <textarea id="description" class="form-control" name="description" placeholder="Enter food description here" th:value="${product?.description}"></textarea>
+                            <input id="price" class="form-control" type="text" placeholder="Enter food price here" inputmode="numeric" style="padding: 5px 12px;" name="price" th:value="${product?.price}" >
+                            <input id="discount" class="form-control" type="text" placeholder="Food Discount in (%)" inputmode="numeric" style="padding: 5px 12px;" name="discount" th:value="${product?.discount}">
                             <select id="idCategory" class="form-select" name="idCategory">
                                 <option th:each="cat : ${listCategory}" th:value="${cat.id}" th:text="${cat.name}"></option>
                             </select>
@@ -50,37 +60,14 @@
                             <label class="form-label text-start" style="width: 466px;">Select food pic</label>
                             <input id="img" class="form-control" type="file" name="file" accept="image/png, image/jpeg" required>
                         </div>
-                        <div class="mb-3"><button class="btn btn-light" type="button" data-bs-dismiss="modal" style="margin-right: 10px;">Close</button>
+                        <div class="mb-3"><button class="btn btn-light" type="button"  data-bs-dismiss="modal" style="margin-right: 10px;">Close</button>
                             <button class="btn btn-primary" type="submit">Save</button></div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-    <div class="modal fade" role="dialog" tabindex="-1" id="modalContactDetails">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header" style="background: var(--bs-gray-200);">
-                    <h4 class="modal-title" style="width: 100%;text-align: center;">Food Details</h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body" style="background: var(--bs-modal-bg);">
-                    <div class="container py-4 py-xl-5">
-                        <div class="row gy-4 row-cols-1 row-cols-md-2 row-cols-xl-3">
-                            <div class="col-10 col-lg-12 col-xl-12 text-center">
-                                <div class="card">
-                                    <div class="card-body p-4"><img width="100" height="80">
-                                        <h4 class="card-title">Food name</h4>
-                                        <h5 class="card-title">food price</h5>
-                                        <p class="card-text">&nbsp;food description</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+
     <section class="login-clean" style="padding-top: 20px;padding-bottom: 10px;">
         <div class="card" style="width: 95%;box-shadow: 3px 3px 7px var(--bs-gray-500);margin-right: auto;margin-left: auto;padding: 15px;">
             <div class="card-body" style="padding: 0px;">
@@ -100,10 +87,10 @@
                         </thead>
                         <tbody>
                             <tr th:each="product:${listProduct}" >
-                                <td style="text-align: right;" th:text="${product.name}">Cell 1</td>
+                                <td style="text-align: left;" th:text="${product.name}">Cell 1</td>
                                 <td style="text-align: right;"> <img height="100px" width="100px" th:src="@{/assets/img/{imgName}/(imgName=${product.img})}"> </td>
-                                <td style="text-align: right;" th:text="${product.description}">Cell 1</td>
-                                <td style="text-align: right;" th:text="${catDao.getNameById(product.idCategory)}">Cell 1</td>
+                                <td style="text-align: left;" th:text="${product.description}">Cell 1</td>
+                                <td style="text-align: left;" th:text="${catDao.getNameById(product.idCategory)}">Cell 1</td>
                                 <td style="text-align: right;" th:text="${product.price}">Cell 1</td>
                                 <td style="text-align: right;" th:text="${product.discount}">Cell 1</td>
 
@@ -113,7 +100,7 @@
                                             <i class="fas fa-trash"></i>
                                         </a>
 
-                                        <button class="btn btn-success" id="btnEdit" type="button" data-bs-target="#modalAddNewItem" data-bs-toggle="modal" th:onClick="showData([[${product.id}]], [[${product.name}]], [[${product.description}]], [[${product.price}]], [[${product.discount}]], [[${product.idCategory}]])"><i class="fas fa-edit" ></i>&nbsp;</button>
+                                        <button class="btn btn-success" id="btnEdit" type="button" title="Update" data-bs-target="#modalAddNewItem" data-bs-toggle="modal" th:onClick="showData([[${product.id}]], [[${product.name}]], [[${product.description}]], [[${product.price}]], [[${product.discount}]], [[${product.idCategory}]])"><i class="fas fa-edit" ></i>&nbsp;</button>
 
                                     </div>
                                 </td>

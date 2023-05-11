@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-  <title>HomePage</title>
+  <title>Invoice</title>
   <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700&amp;display=swap">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic&amp;display=swap">
@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="/assets/css/Bootstrap-4---Payment-Form.css">
   <link rel="stylesheet" href="/assets/css/Features-Image-images.css">
   <link rel="stylesheet" href="/assets/css/Login-Form-Basic-icons.css">
+
 </head>
 
 <body style="margin-top: 20px;margin-right: 20px;margin-bottom: 20px;margin-left: 20px;padding: 10px;">
@@ -75,23 +76,23 @@
       <tbody>
       <tr>
         <td><strong>Subtotal :</strong></td>
-        <td><strong>100</strong></td>
+        <td><strong th:text="${subTotal}">100</strong></td>
       </tr>
       <tr>
         <td>Tax :</td>
-        <td>18%</td>
+        <td th:text="${tax + '%'}">18%</td>
       </tr>
       <tr>
         <td><strong>Grand Total :</strong></td>
-        <td><strong>118</strong></td>
+        <td><strong th:text="${grandTotal}" >118</strong></td>
       </tr>
       <tr>
         <td><strong>Paid :</strong></td>
-        <td><strong>50</strong></td>
+        <td><strong th:text="${paid}">50</strong></td>
       </tr>
       <tr>
         <td>Balance :</td>
-        <td>78</td>
+        <td th:text="${balance}">78</td>
       </tr>
       </tbody>
     </table>

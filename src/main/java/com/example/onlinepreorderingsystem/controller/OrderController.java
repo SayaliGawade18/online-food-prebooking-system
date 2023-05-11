@@ -64,7 +64,7 @@ public class OrderController
 
     }
     @GetMapping("/invoice/{id}/")
-    public String getid(Model model, @PathVariable Long id)
+    public String getId(Model model, @PathVariable Long id)
     {
         List<OrderDetails> listOrderDetails = orderDetailsDao.findAllByIdOrder(id);
         System.out.println(listOrderDetails.toString());
@@ -76,11 +76,11 @@ public class OrderController
         System.out.println("subTotal = " + subTotal);
 
         Double tax = 18.00;
-        Double grandTotal = subTotal + 100*tax/subTotal;
+        Long grandTotal = Math.round(subTotal + 100*tax/subTotal);
         Double paid = orders.getPaid();
         Double balance = grandTotal - paid;
 
-        model.addAttribute("date", Helper.ddMMyyyy.format(orders.getVisitingDateTime()));
+        model.addAttribute("date", Helper.ddMMyyyy.format(orders.getDate()));
         model.addAttribute("listCart", listOrderDetails);
         model.addAttribute("orders", orders);
         model.addAttribute("customer", user);
@@ -124,7 +124,7 @@ public class OrderController
             model.addAttribute("listCart", listCart);
             model.addAttribute("subTotal", Helper.rsFormat(subTotal));
             model.addAttribute("tax",tax);
-            model.addAttribute("grandTotal",Helper.rsFormat(grandTotal));
+            model.addAttribute("grandTotal",Helper.rsFormat(Math.round(grandTotal)));
             model.addAttribute("prodDao",prodDao);
             model.addAttribute("customer", customer);
             model.addAttribute("idOrder", idOrder);
@@ -137,11 +137,12 @@ public class OrderController
 
 
     @GetMapping("/delete/{id}/")
-    public String deleteHotel(Model model, @PathVariable long id)
+    public String deleteOrders(Model model, @PathVariable long id)
     {
         orderDetailsDao.deleteById(id);
-
-        return"redirect:/orders/cart/";
+        List<Orders> list = orderDao.findAll();
+        model.addAttribute("list",list);
+        return"redirect:/orders/cart/-1/";
 
     }
 
@@ -194,16 +195,19 @@ public class OrderController
         return"redirect:/orders/cart/";
 
     }
-    /*@GetMapping("total/delete/{id}/")
-    public String deleteOrders(Model model, @PathVariable long id)
+
+    @GetMapping("/admin/delete/{id}/")
+    public String deleteOrder(Model model, @PathVariable long id)
     {
-        orderDetailsDao.deleteById(id);
+        orderDao.deleteById(id);
+
         List<Orders> listOrders = orderDao.findAll();
-        model.addAttribute("listOrders", listOrders);
+        model.addAttribute("listOrders",listOrders);
+
+        return"ordersAdmin";
+
+    }
 
 
-        return"redirect:/total/orders";
-
-    }*/
 
 }

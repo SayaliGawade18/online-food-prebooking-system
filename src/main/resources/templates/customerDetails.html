@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-  <title>HomePage</title>
+  <title>Customer Details</title>
   <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700&amp;display=swap">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic&amp;display=swap">
@@ -78,11 +78,11 @@
           <tr th:each="user:${listUser}">
             <td th:text="${user.id}" style="text-align: right;">Cell 1</td>
             <td th:text="${user.name}">&nbsp;Name</td>
-            <td th:text="${user.contact}" style="text-align: right;">Contact</td>
-            <td th:text="${user.email}" style="text-align: right;">email</td>
+            <td th:text="${user.contact}" style="text-align: center;">Contact</td>
+            <td th:text="${user.email}" style="text-align: left;">email</td>
             <td class="text-center">
               <div class="btn-group" role="group">
-                <a th:href="@{/user/delete/{id}/(id = ${user.id})}" class="btn btn-danger" role="button" data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-placement="bottom" data-bss-hover-animate="pulse" title="Delete"><i class="fas fa-trash"></i></a></div>
+                <a th:href="@{/customer/user/delete/{id}/(id = ${user.id})}" class="btn btn-danger" role="button" data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-placement="bottom" data-bss-hover-animate="pulse" title="Delete"><i class="fas fa-trash"></i></a></div>
             </td>
           </tr>
           </tbody>

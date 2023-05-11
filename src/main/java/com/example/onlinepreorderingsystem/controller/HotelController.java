@@ -51,7 +51,7 @@ public class HotelController
         hotelDao.save(hotel);
         List<Hotel> list = hotelDao.findAll();
         model.addAttribute("list", list);
-        model.addAttribute("msg", "Add Hotel successfully");
+        model.addAttribute("msg", "Hotel added successfully");
 
         return "hotelDetails";
 

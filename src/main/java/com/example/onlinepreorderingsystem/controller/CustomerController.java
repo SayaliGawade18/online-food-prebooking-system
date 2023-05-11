@@ -112,8 +112,23 @@ public class CustomerController
         model.addAttribute("userDao", userDao);
         model.addAttribute("prodDao", prodDao);
 
+        signInOutCode(model); //newly added
+
         return "ordersCustomer";
     }
+
+    @GetMapping("/user/delete/{id}/")
+    public String deleteCustomer(Model model, @PathVariable long id)
+    {
+        userDao.deleteById(id);
+
+        List<User> listUser = userDao.findByIsAdmin(false);
+        model.addAttribute("listUser", listUser);
+
+        return"customerDetails";
+
+    }
+
 
 
 }

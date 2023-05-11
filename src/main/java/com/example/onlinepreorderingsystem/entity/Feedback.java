@@ -12,14 +12,14 @@ public class Feedback
     @GeneratedValue(strategy = GenerationType.AUTO)
     long Id;
     String name;
-    String msg;
+    String message;
 
     public Feedback() {
     }
 
-    public Feedback(String name, String msg) {
+    public Feedback(String name, String message) {
         this.name = name;
-        this.msg = msg;
+        this.message = message;
     }
 
     public long getId() {
@@ -38,12 +38,12 @@ public class Feedback
         this.name = name;
     }
 
-    public String getMsg() {
-        return msg;
+    public String getMessage() {
+        return message;
     }
 
-    public void setMsg(String msg) {
-        this.msg = msg;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     @Override
@@ -51,7 +51,7 @@ public class Feedback
         return "Feedback{" +
                 "Id=" + Id +
                 ", name='" + name + '\'' +
-                ", msg='" + msg + '\'' +
+                ", message='" + message + '\'' +
                 '}';
     }
 }

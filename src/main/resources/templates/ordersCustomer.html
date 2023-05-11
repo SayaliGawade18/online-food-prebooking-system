@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>HomePage</title>
+    <title>Orders Customer</title>
     <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700&amp;display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic&amp;display=swap">
@@ -19,6 +19,10 @@
 </head>
 
 <body style="background: rgb(241,247,252);">
+
+<div th:replace="fragments.html :: topMenuBar"></div>
+
+
 <div class="modal fade" role="dialog" tabindex="-1" id="modalAddNewItem" style="text-align: right;">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -45,14 +49,14 @@
     </div>
 </div>
 
-<section class="login-clean" style="padding-top: 20px;padding-bottom: 10px;">
+<section class="login-clean" style="padding-top: 20px;padding-bottom: 10px;margin-top:100px">
     <div class="card" style="width: 95%;box-shadow: 3px 3px 7px var(--bs-gray-500);margin-right: auto;margin-left: auto;padding: 15px;">
         <div class="card-body" style="padding: 0px;">
             <div class="input-group" style="margin-bottom: 10px;"><input class="form-control" type="search" id="search" placeholder="Search By Keyword" style="min-width: 100px;" autofocus=""><span class="input-group-text">Max Records to Show</span><input class="form-control" type="number" id="maxRows" value="10" name="maxRow" style="text-align: right;max-width: 100px;"></div>
             <div class="table-responsive">
                 <table class="table">
                     <thead>
-                    <tr style="background: var(--bs-blue);color: var(--bs-table-border-color);">
+                    <tr style="background: var(--bs-primary);color: var(--bs-table-border-color);">
                         <th style="text-align: center;">Order Id</th>
                         <th style="text-align: center;">Order Date</th>
                         <th style="text-align: center;">Status</th>
